@@ -17,25 +17,15 @@ public class Empresa
 {
 
     //-----------------------------------------------------------------
-    // Atributos
+    // Atributos 
     //-----------------------------------------------------------------
 
     /**
-     * L�nea telef�nica n�mero 1.
+     * L�neas telef�nicas.
      */
-    private LineaTelefonica linea1;
+    private LineaTelefonica[] lineas = new LineaTelefonica[3]; // Array que contendra las 3 lineas telefonicas
 
-    /**
-     * L�nea telef�nica n�mero 2.
-     */
-    private LineaTelefonica linea2;
-
-    /**
-     * L�nea telef�nica n�mero 3.
-     */
-    private LineaTelefonica linea3;
-
-    //-----------------------------------------------------------------
+    // --------------------------------------------------------------
     // M�todos
     //-----------------------------------------------------------------
 
@@ -43,11 +33,12 @@ public class Empresa
      * Inicializa las l�neas telef�nicas de la empresa. <br>
      * <b>post: </b> Se inicializaron las 3 l�neas telef�nicas.
      */
-    public Empresa( )
+    public Empresa( ) // Constructor de la clase
     {
-        linea1 = new LineaTelefonica( );
-        linea2 = new LineaTelefonica( );
-        linea3 = new LineaTelefonica( );
+    	// Inicialize la 3 instancias de la clase empresa
+        this.lineas[0] = new LineaTelefonica();
+        this.lineas[1] = new LineaTelefonica();
+        this.lineas[2] = new LineaTelefonica();
     }
 
     /**
@@ -56,7 +47,8 @@ public class Empresa
      */
     public LineaTelefonica darLinea1( )
     {
-        return linea1;
+    	return this.lineas[0]; // Metodo getter para enviar informaci�n al usuario
+ 
     }
 
     /**
@@ -65,16 +57,18 @@ public class Empresa
      */
     public LineaTelefonica darLinea2( )
     {
-        return linea2;
+        return this.lineas[1]; // Metodo getter para enviar informaci�n al usuario
+ 
     }
 
-    /** 
+    /**
      * Retorna la l�nea 3.
      * @return L�nea 3.
      */
     public LineaTelefonica darLinea3( )
     {
-        return linea3;
+    	return this.lineas[2]; // Metodo getter para enviar informaci�n al usuario
+  
     }
 
     /**
@@ -83,7 +77,16 @@ public class Empresa
 	 */
 	public int darTotalNumeroLlamadas( )
 	{
-        return linea1.darNumeroLlamadas() + linea2.darNumeroLlamadas() + linea3.darNumeroLlamadas();
+		int totalLlamadas = 0; // Inicializamos una variable donde acumulamos las llamadas
+		LineaTelefonica[] var5;
+		int var4 = (var5 = this.lineas).length;
+
+		for(int var3 = 0; var3 < var4; ++var3) {
+            LineaTelefonica linea = var5[var3];
+            totalLlamadas += linea.darNumeroLlamadas(); // En cada iteraci�n obtenemos el n�mero de llamada de cada linea y se suma a la variable totalLlamadas
+        }
+
+		return totalLlamadas; // Retornamos el total de llamadas 
 	}
 
 	/**
@@ -92,7 +95,16 @@ public class Empresa
 	 */
 	public int darTotalMinutos( )
 	{
-        return linea1.darTotalMinutos() + linea2.darTotalMinutos() + linea3.darTotalMinutos();
+		int totalMinutos = 0; // Inicializamos una variable donde acumulamos los minutos
+		LineaTelefonica[] var5;
+		int var4 = (var5 = this.lineas).length;
+
+		for(int var3 = 0; var3 < var4; ++var3) {
+            LineaTelefonica linea = var5[var3];
+            totalMinutos += linea.darNumeroMinutos(); // Mismo proceso del metodo anterior
+        }
+
+		return totalMinutos; // Retornamos el total de minutos
 	}
 
 	/**
@@ -100,8 +112,17 @@ public class Empresa
 	 * @return Costo total de las tres l�neas.
 	 */
 	public double darTotalCostoLlamadas( )
-	{        
-        return linea1.darCostoLlamadas() + linea2.darCostoLlamadas() + linea3.darCostoLlamadas();
+	{      
+		double costoTotal = 0.0; // Inicializamos una variable donde acumulamos el costo
+		LineaTelefonica[] var6;
+		int var5 = (var6 = this.lineas).length;
+
+		for(int var4 = 0; var4 < var5; ++var4) {
+            LineaTelefonica linea = var6[var4];
+            costoTotal += linea.darCostoLlamadas(); // Mismo proceso del metodo anterior
+        }
+
+		return costoTotal; // Retornamos el costo total
 	}
 
 	/**
@@ -110,11 +131,17 @@ public class Empresa
 	 */
 	public double darCostoPromedioMinuto( )
 	{
-        int totalMinutos = darTotalMinutos();
-        if (totalMinutos == 0) {
-            return 0;
-        }
-        return darTotalCostoLlamadas() / totalMinutos;
+		
+		int totalMinutos = this.darTotalMinutos();
+		double costoTotal = this.darTotalCostoLlamadas();
+		
+		if (totalMinutos == 0) // Condicional para evitar dividir por 0
+		{
+			return 0.0;
+		}
+		
+		return costoTotal / (double)totalMinutos; // Retornamos el promedio  
+      
 	}
 
 	/**
@@ -122,59 +149,26 @@ public class Empresa
      * <b>post: </b> Se agreg� la llamada a la l�nea 1.
      * @param pMinutos N�mero de minutos de la llamada. pMinutos > 0.
      */
-    public void agregarLlamadaLocalLinea1( int pMinutos )
+    public void agregarLlamadaLocal( int indiceLinea, int pMinutos )
     {
-        linea1.agregarLlamadaLocal( pMinutos );
+    	if (indiceLinea >= 0 && indiceLinea < this.lineas.length) {
+            this.lineas[indiceLinea].agregarLlamadaLocal(pMinutos);
+        }
+        
     }
 
+  
     /**
-     * Agrega una llamada local a la l�nea telef�nica 2. <br>
-     * <b>post: </b> Se agreg� la llamada a la l�nea 2.
-     * @param pMinutos N�mero de minutos de la llamada. pMinutos > 0.
+     * Agrega una llamada de larga distancia a una l�nea telef�nica espec�fica. <br>
+     * @param pMinutos N�mero de minutos de la llamada. `pMinutos` > 0.
      */
-    public void agregarLlamadaLocalLinea2( int pMinutos )
+    public void agregarLlamadaLargaDistancia( int indiceLinea, int pMinutos )
     {
-        linea2.agregarLlamadaLocal( pMinutos );
-    }
+        // Valida que el �ndice de la l�nea sea v�lido antes de intentar acceder a ella.
+        if (indiceLinea >= 0 && indiceLinea < this.lineas.length) {
+            this.lineas[indiceLinea].agregarLlamadaLargaDistancia(pMinutos);
+        }
 
-    /**
-     * Agrega una llamada local a la l�nea telef�nica 3. <br>
-     * <b>post: </b> Se agrega la llamada a la l�nea 3.
-     * @param pMinutos N�mero de minutos de la llamada. pMinutos > 0.
-     */
-    public void agregarLlamadaLocalLinea3( int pMinutos )
-    {
-        linea3.agregarLlamadaLocal( pMinutos );
-    }
-
-    /**
-     * Agrega una llamada de larga distancia a la l�nea telef�nica 1. <br>
-     * <b>post: </b> Se agrega la llamada a la l�nea 1.
-     * @param pMinutos N�mero de minutos de la llamada. pMinutos > 0.
-     */
-    public void agregarLlamadaLargaDistanciaLinea1( int pMinutos )
-    {
-    	linea1.agregarLlamadaLargaDistancia( pMinutos );
-    }
-
-    /**
-     * Agrega una llamada de larga distancia a la l�nea telef�nica 2. <br>
-     * <b>post: </b> Se agrega la llamada a la l�nea 2.
-     * @param pMinutos N�mero de minutos de la llamada. pMinutos > 0.
-     */
-    public void agregarLlamadaLargaDistanciaLinea2( int pMinutos )
-    {
-        linea2.agregarLlamadaLargaDistancia( pMinutos );
-    }
-
-    /**
-     * Agrega una llamada de larga distancia a la l�nea telef�nica 3. <br>
-     * <b>post: </b> Se agrega la llamada a la l�nea 3.
-     * @param pMinutos N�mero de minutos de la llamada. pMinutos > 0.
-     */
-    public void agregarLlamadaLargaDistanciaLinea3( int pMinutos )
-    {
-        linea3.agregarLlamadaLargaDistancia( pMinutos );
     }
 
     /**
@@ -182,29 +176,12 @@ public class Empresa
      * <b>post: </b> Se agrega la llamada a la l�nea 1.
      * @param pMinutos N�mero de minutos de la llamada. pMinutos > 0.
      */
-    public void agregarLlamadaCelularLinea1( int pMinutos )
+    public void agregarLlamadaCelular( int indiceLinea, int pMinutos )
     {
-    	linea1.agregarLlamadaCelular( pMinutos );
-    }
-
-    /**
-     * Agrega una llamada a celular a la l�nea telef�nica 2. <br>
-     * <b>post: </b> Se agrega la llamada a la l�nea 2.
-     * @param pMinutos N�mero de minutos de la llamada. pMinutos > 0.
-     */
-    public void agregarLlamadaCelularLinea2( int pMinutos )
-    {
-        linea2.agregarLlamadaCelular( pMinutos );
-    }
-
-    /**
-     * Agrega una llamada a celular a la l�nea telef�nica 3. <br>
-     * <b>post: </b> Se agrega la llamada a la l�nea 3.
-     * @param pMinutos N�mero de minutos de la llamada. pMinutos > 0.
-     */
-    public void agregarLlamadaCelularLinea3( int pMinutos )
-    {
-        linea3.agregarLlamadaCelular( pMinutos );
+        // Valida que el �ndice de la l�nea sea v�lido antes de intentar acceder a ella.
+        if (indiceLinea >= 0 && indiceLinea < this.lineas.length) {
+            this.lineas[indiceLinea].agregarLlamadaCelular(pMinutos);
+        }
     }
 
     /**
@@ -213,9 +190,11 @@ public class Empresa
      */
     public void reiniciar( )
     {
-        linea1.reiniciar( );
-        linea2.reiniciar( );
-        linea3.reiniciar( );
+        this.lineas[0].reiniciar( );
+        
+        this.lineas[1].reiniciar();
+        
+        this.lineas[2].reiniciar();
     }
 
     //-----------------------------------------------------------------
