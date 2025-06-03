@@ -1,6 +1,6 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Universidad de los Andes (Bogotá - Colombia)
- * Departamento de Ingeniería de Sistemas y Computación 
+ * Universidad de los Andes (Bogotï¿½ - Colombia)
+ * Departamento de Ingenierï¿½a de Sistemas y Computaciï¿½n 
  * Licenciado bajo el esquema Academic Free License version 2.1 
  *
  * Proyecto Cupi2 (http://cupi2.uniandes.edu.co)
@@ -11,7 +11,7 @@
 package uniandes.cupi2.lineasTelefonicas.mundo;
 
 /**
- * Clase que representa una línea telefónica.
+ * Clase que representa una lï¿½nea telefï¿½nica.
  */
 public class LineaTelefonica
 {
@@ -21,12 +21,12 @@ public class LineaTelefonica
     //-----------------------------------------------------------------
 
     /**
-     * Número de llamadas realizadas.
+     * Nï¿½mero de llamadas realizadas.
      */
     private int numeroLlamadas;
 
     /**
-     * Número de minutos consumidos.
+     * Nï¿½mero de minutos consumidos.
      */
     private int numeroMinutos;
 
@@ -36,89 +36,117 @@ public class LineaTelefonica
     private double costoLlamadas;
 
     //-----------------------------------------------------------------
-    // Métodos
+    // Mï¿½todos
     //-----------------------------------------------------------------
 
     /**
-     * Inicializa la línea telefónica. <br>
-     * <b>post: </b> La línea se inicializó con valores en cero.
+     * Inicializa la lï¿½nea telefï¿½nica. <br>
+     * <b>post: </b> La lï¿½nea se inicializï¿½ con valores en cero.
      */
     public LineaTelefonica( )
     {
-    	// TODO Parte2 PuntoA: Inicializar el número de llamadas, número de minutos y costo de llamadas en 0.
+    	numeroLlamadas = 0;
+    	numeroMinutos = 0;
+    	costoLlamadas = 0.0; // Inicialize los atribusto de nï¿½mero de llamadas, nï¿½mero de minutos y costo de llamadas
+    	
     }
 
     /**
      * Retorna el costo total de las llamadas realizadas.
      * @return Costo total de las llamadas realizadas.
      */
-    public double darCostoLlamadas( )
+    public double darCostoLlamadas( )  // Metodo getter para enviar informaciï¿½n al usuario
     {
-        // TODO Parte2 PuntoB: Completar el método según la documentación dada.
+    	return costoLlamadas;
     }
 
     /**
-     * Retorna el número de llamadas realizadas por esta línea.
-     * @return Número de llamadas realizadas por esta línea.
+     * Retorna el nï¿½mero de llamadas realizadas por esta lï¿½nea.
+     * @return Nï¿½mero de llamadas realizadas por esta lï¿½nea.
      */
-    public int darNumeroLlamadas( )
+    public int darNumeroLlamadas( )  // Metodo getter para enviar informaciï¿½n al usuario
     {
-        // TODO Parte2 PuntoC: Completar el método según la documentación dada.
+    	return numeroLlamadas;
+       
     }
 
     /**
-     * Retorna el número de minutos consumidos.
-     * @return Número de minutos consumidos.
+     * Retorna el nï¿½mero de minutos consumidos.
+     * @return Nï¿½mero de minutos consumidos.
      */
-    public int darNumeroMinutos( )
+    public int darNumeroMinutos( )  // Metodo getter para enviar informaciï¿½n al usuario
     {
-        // TODO Parte2 PuntoD: Completar el método según la documentación dada.
+    	return numeroMinutos;
+       
     }
 
     /**
-	 * Reinicia la línea telefónica, dejando todos sus valores en cero.<br>
-	 * <b> post: </b> El número de llamadas, número de minutos y costo de llamadas son 0.
+	 * Reinicia la lï¿½nea telefï¿½nica, dejando todos sus valores en cero.<br>
+	 * <b> post: </b> El nï¿½mero de llamadas, nï¿½mero de minutos y costo de llamadas son 0.
 	 */
 	public void reiniciar( )
 	{
-        // TODO Parte2 PuntoE: Reiniciar el número de llamadas, número de minutos y costo de llamadas en 0.
-	}
+		// Reinicia el nï¿½mero de llamadas a 0
+		numeroLlamadas = 0;
+		
+		// Reinicia el nï¿½mero de minutos a 0
+		numeroMinutos = 0;
+		
+		// Reinicia el costo de llamada a 0
+		costoLlamadas = 0.0;
+  	}
 
 	/**
-     * Agrega una llamada local a la línea telefónica <br>
-     * <b>post: </b> Se incrementó en 1 numeroDeLlamadas, se incremento numeroDeMinutos en minutos, costoLlamadas aumentó en ( minutos * 35 ).
-     * @param pMinutos Número de minutos de la llamada. pMinutos >0.
+     * Agrega una llamada local a la lï¿½nea telefï¿½nica <br>
+     * <b>post: </b> Se incrementï¿½ en 1 numeroDeLlamadas, se incremento numeroDeMinutos en minutos, costoLlamadas aumentï¿½ en ( minutos * 35 ).
+     * @param pMinutos Nï¿½mero de minutos de la llamada. pMinutos >0.
      */
     public void agregarLlamadaLocal( int pMinutos )
     {
-        //Una llamada más
+        //Una llamada mï¿½s
         numeroLlamadas = numeroLlamadas + 1;
-        //
+        
         //Suma los minutos consumidos
         numeroMinutos = numeroMinutos + pMinutos;
-        //
+        
         //Suma el costo (costo por minuto: 35 pesos)
         costoLlamadas = costoLlamadas + ( pMinutos * 35 );
     }
 
     /**
-     * Agrega una llamada de larga distancia a la línea telefónica <br>
-     * <b>post: </b> Se incrementó en 1 numeroDeLlamadas, se incremento numeroDeMinutos en minutos, costoLlamadas aumentó en ( minutos * 380 )
-     * @param pMinutos Número de minutos de la llamada. pMinutos >0.
+     * Agrega una llamada de larga distancia a la lï¿½nea telefï¿½nica <br>
+     * <b>post: </b> Se incrementï¿½ en 1 numeroDeLlamadas, se incremento numeroDeMinutos en minutos, costoLlamadas aumentï¿½ en ( minutos * 380 )
+     * @param pMinutos Nï¿½mero de minutos de la llamada. pMinutos >0.
      */
-    public void agregarLlamadaLargaDistancia( int pMinutos )
+    public void agregarLlamadaLargaDistancia( int pMinutos ) 
     {
-        // TODO Parte2 PuntoF: Completar el método según la documentación dada.
+    	// Incrementa en 1 el nï¿½mero de llamadas
+    	numeroLlamadas += 1;
+    	
+    	// Incrementa el nï¿½mero de minutos con el metodo que contiene la cantidad de minutos que duro la llamada
+    	numeroMinutos += pMinutos;
+    	
+    	// Aumenta el costo de la llamada mï¿½ltiplicando la duraciï¿½n de la llamada por el prï¿½cio
+    	costoLlamadas += (double)pMinutos * 380;
+    	
     }
 
     /**
-     * Agrega una llamada a celular a la línea telefónica <br>
-     * <b>post: </b> Se incrementó en 1 numeroDeLlamadas, se incremento numeroDeMinutos en minutos, costoLlamadas aumentó en ( minutos * 999 )
-     * @param pMinutos Número de minutos de la llamada. pMinutos >0.
+     * Agrega una llamada a celular a la lï¿½nea telefï¿½nica <br>
+     * <b>post: </b> Se incrementï¿½ en 1 numeroDeLlamadas, se incremento numeroDeMinutos en minutos, costoLlamadas aumentï¿½ en ( minutos * 999 )
+     * @param pMinutos Nï¿½mero de minutos de la llamada. pMinutos >0.
      */
     public void agregarLlamadaCelular( int pMinutos )
     {
-        // TODO Parte2 PuntoG: Completar el método según la documentación dada.
+    	// Incrementa en 1 el nï¿½mero de llamadas
+    	numeroLlamadas += 1;
+    	
+    	// Incrementa el nï¿½mero de minutos
+    	numeroMinutos += pMinutos;
+    	
+    	// Aumenta el costo de la llamada por el prï¿½cio
+    	costoLlamadas += (double)pMinutos * 999;
+
     }
 
 }
